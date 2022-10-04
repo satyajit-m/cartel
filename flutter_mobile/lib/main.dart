@@ -45,6 +45,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   int _currentIndex = 0;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +55,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         leading: Container(
             margin: const EdgeInsets.all(10.0),
             child: const Icon(Icons.person)),
+
         title: const Text(
           'Feeds',
           style: TextStyle(
@@ -63,6 +65,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ),
       ),
       body: Center(child: _widgetOptions.elementAt(_currentIndex)),
+
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.edit),
         onPressed: () {},
@@ -90,7 +93,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         currentIndex: _currentIndex,
         selectedItemColor: Colors.purple,
         onTap: showItemPage,
+
       ),
+      onPressed: () {},
     );
   }
 
@@ -99,4 +104,5 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       _currentIndex = index;
     });
   }
+
 }
