@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile/profile.dart';
 
 void main() => runApp(const MyApp());
 
@@ -38,9 +39,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     Text(
       'Index 2: Notifications',
     ),
-    Text(
-      'Index 2: Profile',
-    )
+    Profile()
   ];
 
   int _currentIndex = 0;
