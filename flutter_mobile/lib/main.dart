@@ -9,13 +9,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       title: _title,
-     theme:  ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:const MyStatefulWidget(),
+      home: const MyStatefulWidget(),
     );
   }
 }
@@ -28,6 +28,23 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+    ),
+    Text(
+      'Index 1: Search',
+    ),
+    Text(
+      'Index 2: Notifications',
+    ),
+    Text(
+      'Index 2: Profile',
+    )
+  ];
+
+  int _currentIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +53,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         elevation: 1,
         backgroundColor: Colors.grey[200],
         leading: Container(
-          margin: const EdgeInsets.all(10.0),
-          child: const Icon(Icons.person)
-        ),
+            margin: const EdgeInsets.all(10.0),
+            child: const Icon(Icons.person)),
+
         title: const Text(
           'Feeds',
           style: TextStyle(
@@ -47,34 +64,45 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ),
       ),
-      body: listOfTweets(),
+      body: Center(child: _widgetOptions.elementAt(_currentIndex)),
+
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.edit),
         onPressed: () {},
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            showButton(Icons.home, Colors.purple),
-            showButton(Icons.search, Color.fromARGB(115, 190, 154, 154)),
-            showButton(Icons.notifications, Color.fromARGB(115, 190, 154, 154)),
-            showButton(Icons.mail_outline, Color.fromARGB(115, 190, 154, 154)),
-          ],
-        ),
-      ),
-    );
-  }
-  
-  listOfTweets() {}
-Widget showButton(IconData icon, Color color) {
-    return IconButton(
-      icon: Icon(
-        icon,
-        color: color,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+            
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notification',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          )
+        ],
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.purple,
+        onTap: showItemPage,
+
       ),
       onPressed: () {},
     );
+  }
+
+  showItemPage(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
 }
